@@ -9,10 +9,6 @@ import Cleave from 'cleave.js/react';
 import Spinner from './spinner';
 import Success from './success';
 import Fail from './fail';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { onUserRegister } from '../store/actions';
-import NewUser from '../utils/new-user';
 
 const RegistroContainer = ({ children }) => (
   <div className="container_registro">
@@ -290,7 +286,8 @@ class Registro extends Component {
                 this.setState({ spinner: false, success: true, successText: `${resp.mail} agregado con exito` });
                 setTimeout(() => {
                   this.setState({ pseudo: true, success: false, successText: '' });
-                  window.location=`/postregister?id=${resp.id}`;
+                  //window.location=`/postregister?id=${resp.id}`;
+                  Router.push(`/postregister?id=${resp.id}`);
                 }, 3000);
               });
           } else {

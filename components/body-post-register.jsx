@@ -1,6 +1,7 @@
 import './body-post-register.scss';
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
+import Router from 'next/router';
 
 class BodyPostRegister extends Component {
   constructor(props){
@@ -49,7 +50,7 @@ class BodyPostRegister extends Component {
         if (res.ok) {
           res.text()
             .then((res) => {
-              window.location=`/perfil?id=${res}`;
+              Router.push(`/perfil?id=${res}`);
             })
         } else {
           res.text()
