@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 node_modules
 .env
+=======
+api/node_modules
+api/yarn.lock
+>>>>>>> 5e571f9d2a01b5e6d45235b43305c45442798aaa

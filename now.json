@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "version": 2,
   "alias": "greenlink-project",
@@ -36,3 +37,6 @@
     }
   ]
 }
+=======
+{"version":2,"name":"pruebaexpress","builds":[{"src":"www/**/*","use":"@now/static"},{"src":"api/**/*.js","use":"@now/node"}],"routes":[{"src":"/","dest":"www/index.html"}]}
+>>>>>>> 5e571f9d2a01b5e6d45235b43305c45442798aaa

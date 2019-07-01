@@ -44,7 +44,7 @@ class BodyPostRegister extends Component {
       body: JSON.stringify(data),
       method: "POST"
     }
-    fetch('/api/postregister.js', options)
+    fetch('/api/postregister', options)
       .then((res) => {
         if (res.ok) {
           res.text()

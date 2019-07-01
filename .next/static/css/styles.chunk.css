@@ -21208,6 +21208,112 @@ a {
     margin: 0 .5rem;
     color: #fff; }
 
+.login_main_cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; }
+  .login_main_cont .form_cont {
+    border: 1px solid #669f09;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  .login_main_cont .form_login {
+    text-align: center;
+    padding-bottom: 1rem; }
+  .login_main_cont .input_cont {
+    border: 0.5px solid #8bb940;
+    margin: 1.5rem 0;
+    padding: .5rem 0 0;
+    position: relative;
+    border-bottom: 3px solid #669f09; }
+    .login_main_cont .input_cont label {
+      top: -.5rem;
+      left: .5rem;
+      background: #fff;
+      color: #669f09;
+      padding: 0 0.3rem;
+      font-size: 11px;
+      display: block;
+      margin: 0;
+      position: absolute; }
+    .login_main_cont .input_cont input {
+      padding: 0 .5rem;
+      border: none;
+      margin: 0;
+      width: 95%;
+      outline: none; }
+  .login_main_cont button {
+    border-color: #fff;
+    font-size: .8rem;
+    color: #fff;
+    margin: 0;
+    outline: none;
+    background: #669f09;
+    align-self: flex-end; }
+    .login_main_cont button:hover {
+      background: #669f09; }
+    .login_main_cont button:hover {
+      background: #8bb940; }
+
+.popMsg p {
+  height: 100%;
+  padding: 0;
+  margin: .5rem;
+  font-size: 11px;
+  color: #ff6c1a; }
+
+.msg_request_cont {
+  color: #ff6c1a;
+  fill: #ff6c1a;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
+  .msg_request_cont svg {
+    width: 100px; }
+  .msg_request_cont p {
+    text-align: center;
+    padding: .5rem; }
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px; }
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #669f09;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #669f09 transparent transparent transparent; }
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s; }
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s; }
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s; }
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 html {
   scroll-behavior: smooth; }
 

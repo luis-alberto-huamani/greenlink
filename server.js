@@ -11,72 +11,11 @@ const mongoose = require('mongoose');
 const UserSchema = require('./models/user');
 dotenv.config();
 
-/*const users = [
-  {
-    id: 'greenlink-default-user',
-    mail: 'queen-green@gmail.com',
-    pass: 'greenlink',
-    name: 'sophie',
-    lastName: 'green',
-    birthday: '22/06/2019',
-    genre: 'mujer',
-    perfilImg: '/static/queengreen.jpg',
-    frontPageImg: '/static/queenfront.jpg',
-    frontPageQuote: '"crear un mundo mas limpio es nuestro deber, nuestro derecho es disfrutarlo! compartiendo... con los seres que amamos"',
-    greencoins:5000,
-    posts:[
-      {
-        id:'default',
-        img:'/static/bg-card.jpg',
-        likes:5,
-        comments:[
-          {
-            userId: 'admin',
-            id:'comment-1',
-            comment:'me encanta esta inciativa',
-          }
-        ],
-      }
-    ],
-    friends:['admin'],
-    gifts:['fanta', 'snikers', 'oreo'],
-  },
-  {
-    id: 'greenlink-default-user-felix',
-    mail: 'felix@mail.com',
-    pass: '123456',
-    name: 'felix',
-    lastName: 'tineo',
-    birthday: '13/05/1986',
-    genre: 'hombre',
-    perfilImg: '/static/felix.jpg',
-    frontPageImg: '/static/queenfront.jpg',
-    frontPageQuote: '"crear un mundo mas limpio es nuestro deber, nuestro derecho es disfrutarlo! compartiendo... con los seres que amamos"',
-    greencoins:5000,
-    posts:[
-      {
-        id:'default',
-        img:'/static/bg-card.jpg',
-        likes:5,
-        comments:[
-          {
-            userId: 'admin',
-            id:'comment-1',
-            comment:'me encanta esta inciativa',
-          }
-        ],
-      }
-    ],
-    friends:['admin'],
-    gifts:['fanta', 'snikers', 'oreo'],
-  },
-];*/
-
-
 app
   .prepare()
   .then(() => {
     const server = express();
+
     server.use(bodyParser.json({ limit: "16mb", extended: true }));
     server.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
 
@@ -86,60 +25,79 @@ app
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'Error la conexion a la base de datos fallo'));
 
-    server.post('/foo', (req, res) => {
-      const id = '5d12c8f8c2e0767a295b2abd';
-      const { img } = req.body;
-      UserSchema.findByIdAndUpdate(id, { perfilImg: img }, (err, info) => {
-        if (err) console.error(err);
-        console.log(info);
-      });
-      res.status(200).send(img);
-    })
-    server.post('/api/registro', (req, res) => {
-      const data = req.body;
-      const checkMail = users.find((user) => {
-        return user.mail === data.mail;
-      })
-      console.log(checkMail);
-      setTimeout(() => {
-        if (checkMail) {
-          res.status(501).send(checkMail.mail);
-        } else {
-          user = new NewUser(data);
-          users.push(user);
-          res.status(200).send(user.fullName);
-        }
-      },3000)
+    server.post('/api/registro', async (req, res) => {
+      const user = req.body;
+      const newUser = UserSchema(user);
+      const isRegistred = await UserSchema.findOne({ mail: user.mail });
+      if (isRegistred) {
+        res.status(501).send(user.mail);
+      } else {
+        const userDone = await newUser.save();
+        const data = {
+          mail: userDone.mail,
+          id: userDone.id
+        };
+        res.status(200).json(data);
+      }
     });
-    server.post('/api/login', (req, res) => {
-      const data = req.body;
-      const checkMail = users.find((user) => {
-        return user.mail === data.mail && user.pass === data.pass;
-      })
-      setTimeout(() => {
-        if (checkMail) {
-          res.status(200).send(checkMail.id);
-        } else {
-          res.status(501).send();
-        }
-      },3000)
+
+    server.post('/api/postregister', async (req, res) => {
+      const { id, img } = req.body;
+      const isOk = await UserSchema.findByIdAndUpdate(id, { perfilImg: img });
+      if (isOk) {
+        res.status(200).send(id);
+      } else {
+        res.status(501).send(id);
+      }
     });
-    server.get('/api/perfil/:id', (req, res) => {
-      user = users.find((user) => {
-        return user.id === req.params.id;
-      })
-      res.status(200).json(user);
-    })
+
+    server.post('/api/newpost', async (req, res) => {
+      const reqId = req.body.id;
+      const reqAuthor = req.body.author;
+      const reqDate = req.body.date;
+      const reqImg = req.body.imgUrl;
+      const reqhistory = req.body.history;
+      const newPost = {
+        author: reqAuthor,
+        date: reqDate,
+        imgUrl:  reqImg,
+        history: reqhistory,
+      };
+    
+      const resp = await UserSchema.findByIdAndUpdate(reqId, { $push: { posts: newPost } });
+      if (resp) {
+        res.status(200).send("todo bien");
+      } else {
+        res.status(501).send("todo mal");
+      }
+    });
+
+    server.post('/api/perfil', async (req, res) => {
+      const id = req.body.reqid;
+      const data = await UserSchema.findById(id);
+      res.status(200).json(data);
+    });
+
+    server.post('/api/login', async (req, res) => {
+      const user = req.body;
+      const validateUser = await UserSchema.findOne({ mail: user.mail, pass: user.pass });
+      if (validateUser) {
+        res.status(200).send(validateUser.id);
+      } else {
+        res.status(501).send();
+      }
+    });
+    
     server.get('*', (req, res) => {
-      return handle(req, res)
+      return handle(req, res);
     });
+
     server.listen(3000, err => {
       if (err) throw err;
-      console.log('Server listen in port 3000');
+      console.log('> Ready on http://localhost:3000');
     });
   })
   .catch(ex => {
-    console.log(ex.stack);
+    console.error(ex.stack);
     process.exit(1);
   });
-//"src": "/api/perfil/(?<id>[^/]*)", "dest": "/api/perfil.js?id=$id",
