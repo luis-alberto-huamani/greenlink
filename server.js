@@ -20,7 +20,7 @@ app
     server.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
 
     const mongoDB = process.env.URI_DB;
-    mongoose.connect(mongoDB, { useFindAndModify: false });
+    mongoose.connect(mongoDB, { useFindAndModify: false, useNewUrlParser: true });
     mongoose.Promise = global.Promise;
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'Error la conexion a la base de datos fallo'));
