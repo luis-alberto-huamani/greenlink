@@ -2,11 +2,11 @@
   "modules": {
     "byIdentifier": {
       "multi private-next-pages/_app.js": 0,
-      "multi private-next-pages/index.js": 1,
-      "multi private-next-pages/login.js": 2,
-      "multi private-next-pages/perfil.js": 3,
-      "multi private-next-pages/postregister.js": 4,
-      "multi private-next-pages/foo.jsx": 5,
+      "multi private-next-pages/foo.jsx": 1,
+      "multi private-next-pages/index.js": 2,
+      "multi private-next-pages/login.js": 3,
+      "multi private-next-pages/perfil.js": 4,
+      "multi private-next-pages/postregister.js": 5,
       "multi next/dist/pages/_error": 6,
       "multi next/dist/pages/_document": 7
     },

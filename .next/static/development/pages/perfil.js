@@ -190,8 +190,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _card_post_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./card-post.scss */ "./components/card-post/card-post.scss");
-/* harmony import */ var _card_post_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_card_post_scss__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var _card_post_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./card-post.scss */ "./components/card-post/card-post.scss");
+/* harmony import */ var _card_post_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_card_post_scss__WEBPACK_IMPORTED_MODULE_8__);
+
 
 
 
@@ -238,9 +240,11 @@ function (_Component) {
     _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(CardPost).call(this, props));
     _this.state = {
       likes: 0,
-      myLike: false
+      myLike: false,
+      popConfig: false
     };
     _this.handleLike = _this.handleLike.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
+    _this.onPopConfig = _this.onPopConfig.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
     return _this;
   }
 
@@ -271,11 +275,20 @@ function (_Component) {
       }
     }
   }, {
+    key: "onPopConfig",
+    value: function onPopConfig() {
+      var popConfig = this.state.popConfig;
+      this.setState({
+        popConfig: !popConfig
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$state2 = this.state,
           likes = _this$state2.likes,
-          myLike = _this$state2.myLike;
+          myLike = _this$state2.myLike,
+          popConfig = _this$state2.popConfig;
       var _this$props$post = this.props.post,
           author = _this$props$post.author,
           date = _this$props$post.date,
@@ -291,7 +304,16 @@ function (_Component) {
         src: author.img
       }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
         className: "post_data"
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", null, author.name), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", null, date))), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", null, "...")), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", null, author.name), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("p", null, date))), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+        className: "btnConfug"
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", {
+        id: "btnConfug",
+        onClick: this.onPopConfig
+      }, "..."), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_7__["Popover"], {
+        placement: "bottom",
+        target: "btnConfug",
+        isOpen: popConfig
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_7__["PopoverBody"], null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", null, "Editar")), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", null, "Eliminar"))))))), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
         className: "img",
         style: imgUrl ? {
           background: "url(\"".concat(imgUrl, "\") top center no-repeat"),
@@ -31592,7 +31614,7 @@ var onUserRegister = function onUserRegister(user) {
 
 /***/ }),
 
-/***/ 19:
+/***/ 10:
 /*!*******************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fperfil&absolutePagePath=%2Fmedia%2Ffelix%2Fprojects%2Fnextjs%2Fpages%2Fperfil.js ***!
   \*******************************************************************************************************************************/
@@ -31615,5 +31637,5 @@ module.exports = dll_7aff549c98b978433226;
 
 /***/ })
 
-},[[19,"static/runtime/webpack.js","styles"]]]);
+},[[10,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=perfil.js.map
